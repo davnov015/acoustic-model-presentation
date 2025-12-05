@@ -1,5 +1,5 @@
 import numpy as np
-from util import get_all_tube_file_names, get_tube_file_name, window_size, tube_run_count, first_peak_n
+from util import get_tube_file_name, window_size, tube_run_count, first_peak_n, tube_lengths, iris_count, effective_iris_count
 from fit_util import moving_avg
 from peak_detector import find_peaks
 
@@ -36,6 +36,9 @@ class TubeData:
         self._ma_frequency = frequency[(self.avg_length - 1) * 2:]
         self._peak_indices = find_peaks(self._amplitude_ma, self._ma_frequency, window_size[tube_run_index])
         self._first_peak_n = self.first_peak_n[tube_run_index]
+        self._tube_length = tube_lengths[tube_run_index]
+        self._iris_count = iris_count[tube_run_index]
+        self._effective_iris_count = effective_iris_count[tube_run_index]
 
     @property
     def frequency(self):
@@ -65,8 +68,28 @@ class TubeData:
     def resonance_n(self):
         diff = np.diff(self.peak_frequencies)
         mean_diff = np.mean(diff[diff < 1.4 * np.mean(diff)])
+        if self._iris_count > 0:
+            mean_diff = np.mean(diff[diff > 0.5 * np.mean(diff)])
         n_delta = np.round(diff / mean_diff)
         n = np.zeros(len(n_delta) + 1)
         n[0] = self._first_peak_n
         n[1:] = n_delta
         return np.cumsum(n)
+
+    @property
+    def tube_length(self):
+        return self._tube_length
+
+    @property
+    def iris_count(self):
+        return self._iris_count
+
+    @property
+    def wavenumber(self):
+        iris_count = self._effective_iris_count or 1
+        wavelength_per_l = (iris_count - 1) * 1/2 + 1/2
+        return 2 * np.pi * self.resonance_n * wavelength_per_l / (self.tube_length / 100)
+
+    @property
+    def angular_frequency(self):
+        return 2 * np.pi * self.peak_frequencies

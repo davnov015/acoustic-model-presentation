@@ -3,9 +3,10 @@ path_prefix = "data/output"
 
 tube_run_count = 13
 tube_lengths = [37.5, 30, 5, 20, 55, 60, 58.5, 57.5, 56.5, 60, 63.5, 62, 61]
+effective_iris_count = [0, 0, 0, 0, 0, 11, 7, 5, 3, 0, 8, 5, 3]
 iris_count = [0, 0, 0, 0, 0, 10, 7, 5, 3, 0, 7, 4, 2]
-window_size = [400, 400, 700, 800, 150, 150, 100, 100, 100, 370, 200, 150, 400]
-first_peak_n = [1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1]
+window_size = [400, 400, 1070, 800, 150, 2000, 100, 100, 100, 370, 200, 500, 400]
+first_peak_n = [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 2]
 
 assert len(tube_lengths) == len(iris_count) == len(window_size) == len(first_peak_n) == tube_run_count
 
