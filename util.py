@@ -4,8 +4,10 @@ path_prefix = "data/output"
 tube_run_count = 13
 tube_lengths = [37.5, 30, 5, 20, 55, 60, 58.5, 57.5, 56.5, 60, 63.5, 62, 61]
 iris_count = [0, 0, 0, 0, 0, 10, 7, 5, 3, 0, 7, 4, 2]
+window_size = [400, 400, 700, 800, 150, 150, 100, 100, 100, 370, 200, 150, 400]
+first_peak_n = [1, 1, 1, 1, 1, 2, 1, 1, 2, 2, 2, 1, 1]
 
-assert len(tube_lengths) == len(iris_count) == tube_run_count
+assert len(tube_lengths) == len(iris_count) == len(window_size) == len(first_peak_n) == tube_run_count
 
 def get_tube_file_name(run_index: int, include_path_prefix=False):
     """
