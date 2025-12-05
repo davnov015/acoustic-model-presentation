@@ -39,7 +39,7 @@ amplitude_ma = amplitude_ma[avg_length - 1:]
 
 ma_f_space = f_space[(avg_length - 1) * 2:]
 
-peaks = find_peaks(amplitude_ma, ma_frequency, 400)
+peaks = find_peaks(amplitude_ma, ma_frequency, 300)
 
 
 plt.plot(ma_frequency, amplitude_ma, color="red")

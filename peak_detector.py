@@ -51,8 +51,9 @@ def find_peaks(data: np.typing.NDArray, frequency: np.typing.NDArray, frequency_
             new_peaks = np.union1d(new_peaks, fresh_peaks)
         # peaks = np.unique(new_peaks)
         peaks = np.union1d(peaks, new_peaks)
-        # bins = np.linspace(0, data.size - 1, data.size // 100)
-        # frequencies = np.histogram(peaks, bins=bins, density=False)
+        bins = np.linspace(0, data.size - 1, data.size // 100)
+        frequencies, _ = np.histogram(peaks, bins=bins, density=False)
+        assert np.where(frequencies > 1)[0].size == 0
         return peaks
     return np.array(peaks)
 
