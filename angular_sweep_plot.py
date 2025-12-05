@@ -21,7 +21,7 @@ def fit_eqn(theta):
     pass
 
 plt.scatter(resonator.angular_position, resonator.amplitude, linewidths=0.1, label="Data")
-plt.plot(theta * 180 / np.pi, 7 * spherical_harmonic_proj(0, 2, theta_grid), color="red", label=r"$Y_{0, 2}$")
+plt.plot(theta * 180 / np.pi, 7 * spherical_harmonic_proj(0, 2, theta_grid), color="red", label=r"$Y_{2}^0$")
 plt.xlabel(r'Angular Position ($^\circ$)')
 plt.ylabel('Amplitude (V)')
 plt.title('Spherical Resonator - Angular Sweep @ 4970 Hz')

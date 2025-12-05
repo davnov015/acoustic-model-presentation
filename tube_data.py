@@ -9,6 +9,7 @@ class TubeData:
     first_peak_n = first_peak_n
     hz_per_volt = 1000
     avg_voltage_offset = 2.04
+    delta_hz_per_volt = 30
     avg_length = 10
 
     def __init__(self, tube_run_index: int):
@@ -93,3 +94,8 @@ class TubeData:
     @property
     def angular_frequency(self):
         return 2 * np.pi * self.peak_frequencies
+
+    @property
+    def angular_frequency_delta(self):
+        f_delta = self.peak_frequencies / self.hz_per_volt * self.delta_hz_per_volt
+        return 2 * np.pi * f_delta
